@@ -1,8 +1,11 @@
-
 import * as React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import { PaperProvider } from 'react-native-paper';
+import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
+import Home from './screen/Home';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+//import { Router, Route , hashHistory } from 'react-router';
 
 const theme = {
   ...DefaultTheme,
@@ -13,18 +16,23 @@ const theme = {
   },
 };
 
+const Stack = createNativeStackNavigator();
+
 export default function App() {
   return (
     <PaperProvider theme={theme}>
-      <View style={styles.container}>
+      {/* <View style={styles.container}>
         <Text>Open up App.js to start working on your app!</Text>
         <StatusBar style="auto" />
-      </View>
+      </View> */}
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Home">
+          <Stack.Screen name="Home" component={Home} options={{ title: 'Overview' }}/>
+        </Stack.Navigator>
+      </NavigationContainer>
     </PaperProvider>
   );
 }
-
-
 
 const styles = StyleSheet.create({
   container: {
